@@ -29,7 +29,7 @@ class CoaxialCylinder:
         N_z = max(N_z, 5)
 
         r = np.linspace(self.r_i, self.r_o, N_r)
-        theta = np.linspace(0, 2 * np.pi, N_theta)
+        theta = np.linspace(0, 2 * np.pi, N_theta, endpoint=False)
         half_L = self.L / 2
         z = np.linspace(-half_L, half_L, N_z)
 
@@ -70,19 +70,18 @@ class CoaxialCylinder:
         """
         x, y, z = self.points
 
-        r_cyl = np.sqrt(x**2 + y**2)
+        r = np.sqrt(x**2 + y**2)
+        r_safe = np.maximum(r, 1e-15)
 
-        r = np.where(r_cyl == 0, 1e-15, r_cyl)
-
-        # Vetor radial
-        Ex = Er * (x / r)
-        Ey = Er * (y / r)
+        Ex = Er * (x / r_safe)
+        Ey = Er * (y / r_safe)
 
         vectors = np.vstack((Ex, Ey, Ez)).T
         points = np.vstack((x, y, z)).T
 
         mag = np.linalg.norm(vectors, axis=1)
+        mag_safe = np.maximum(mag, 1e-15)
 
-        vectors_unit = vectors / mag[:, None]
+        vectors_unit = vectors / mag_safe[:, None]
 
         return points, vectors_unit, mag
