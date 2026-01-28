@@ -8,6 +8,8 @@ class Plot:
     PyVista plot of the electric field using fixed-size glyphs and magnitude-based coloring.
     """
 
+    LINE_WIDTH = 1
+
     def __init__(self, glyph_size=1e-3):
         """
         Initialize the PyVista plotter and field model.
@@ -57,14 +59,14 @@ class Plot:
         y_axis = pv.Line((0, -AXIS_LENGTH, 0), (0, AXIS_LENGTH, 0))
         z_axis = pv.Line((0, 0, -AXIS_LENGTH), (0, 0, AXIS_LENGTH))
 
-        LINE_WIDTH = 1
-
-        self.plotter.add_mesh(x_axis, color="red", line_width=LINE_WIDTH, name="x_axis")
         self.plotter.add_mesh(
-            y_axis, color="green", line_width=LINE_WIDTH, name="y_axis"
+            x_axis, color="red", line_width=self.LINE_WIDTH, name="x_axis"
         )
         self.plotter.add_mesh(
-            z_axis, color="blue", line_width=LINE_WIDTH, name="z_axis"
+            y_axis, color="green", line_width=self.LINE_WIDTH, name="y_axis"
+        )
+        self.plotter.add_mesh(
+            z_axis, color="blue", line_width=self.LINE_WIDTH, name="z_axis"
         )
 
         pv.Plotter.add_axes(self.plotter)
