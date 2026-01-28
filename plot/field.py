@@ -96,3 +96,34 @@ class DielectricField:
         Ez_diel = np.where(mask_diel, Ez * factor_diel, Ez)
 
         return self.coords.to_cartesian(Er_diel, Ez_diel)
+
+    def mean_radial_error(self):
+        """
+        Compute the mean volumetric relative error of the radial electric field
+        due to the finite length of the coaxial cylinder.
+
+        The error is defined as:
+            ε(r, z) = 1 - F(r, z)
+
+        and averaged over the cylindrical volume using the correct geometric
+        weight (r dr dz).
+
+        Returns
+        -------
+        float
+            Mean relative error (dimensionless).
+        """
+
+        r_a = self.r_a
+        r_b = self.r_b
+        L = self.L
+
+        numerator = (
+            (r_b**2 + L**2) ** (3 / 2) - (r_a**2 + L**2) ** (3 / 2) - (r_b**3 - r_a**3)
+        )
+
+        denominator = r_b**2 - r_a**2
+
+        mean_error = 1 - (2 / (3 * L)) * (numerator / denominator)
+
+        return mean_error
