@@ -51,22 +51,22 @@ The electric field is computed by superposition of finite line charge contributi
 - VTK (installed automatically with PyVista)
 
 Install dependencies using pipenv:
-'''
+```
 pipenv install
-'''
+```
 or
-'''
+```
 pipenv install --dev
-'''
+```
 
 ---
 
 ## Running the Project
 
 From the project root folder:
-'''
+```
 python3 plot/main.py
-'''
+```
 
 ---
 
