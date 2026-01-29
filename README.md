@@ -68,7 +68,7 @@ Install dependencies using pipenv:
 ```
 pipenv install
 ```
-or
+Or, to install development packages as well:
 ```
 pipenv install --dev
 ```
