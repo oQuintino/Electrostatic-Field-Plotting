@@ -17,16 +17,22 @@ It is intended as an educational and research-oriented tool, demonstrating both 
 ## Physical Problem Description
 
 The system modeled consists of:
+
 - An inner conductor at fixed potential
 - A dielectric layer surrounding the inner conductor
 - An outer grounded conductor
 - A finite cylinder length, introducing edge effects
 
 Unlike the ideal infinite coaxial cable, the finite length causes:
+
 - Axial electric field components
 - Deviations from the purely radial analytical solution
 
-The electric field is computed by superposition of finite line charge contributions and corrected inside the dielectric region using permittivity ratios.
+In the ideal infinite-length case, the purely radial electric field is obtained
+from Laplace’s equation in cylindrical coordinates, assuming radial dependence
+only. The electric field in the finite system is computed by superposition of
+finite line charge contributions and corrected inside the dielectric region using
+permittivity ratios.
 
 ---
 
@@ -65,11 +71,11 @@ pipenv shell
 - VTK (installed automatically with PyVista)
 
 Install dependencies using pipenv:
-```
+```bash
 pipenv install
 ```
 Or, to install development packages as well:
-```
+```bash
 pipenv install --dev
 ```
 
@@ -78,7 +84,7 @@ pipenv install --dev
 ## Running the Project
 
 From the project root folder:
-```
+```bash
 python3 plot/main.py
 ```
 
